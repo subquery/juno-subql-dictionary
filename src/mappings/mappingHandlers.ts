@@ -8,7 +8,7 @@ export async function handleEvent(event: CosmosEvent) {
     eventStore.txHash = event.tx.hash;
     eventStore.type = event.event.type;
     eventStore.msgType = event.msg.msg.typeUrl;
-    const msgData = event.msg.msg;
+    const msgData = event.msg.msg.decodedMsg;
     eventStore.data = Object.keys(msgData).map(key => ({ key: key, value: msgData[key] }));
     await eventStore.save();
 }
@@ -19,8 +19,7 @@ export async function handleMessage(message: CosmosMessage) {
     messageStore.blockHeight = blockHeight;
     messageStore.txHash = message.tx.hash;
     messageStore.type = message.msg.typeUrl;
-    const msgData = message.msg;
+    const msgData = message.msg.decodedMsg;
     messageStore.data = Object.keys(msgData).map(key => ({ key: key, value: msgData[key] }));
     await messageStore.save();
 }
-
