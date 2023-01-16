@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+name: injective-dictionary
+version: 1.0.0
+runner:
+  node:
+    name: "@subql/node-cosmos"
+    version: "*"
+  query:
+    name: "@subql/query"
+    version: "*"
+description: A SubQuery project provide dictionary data & service for the Cosmos - Injective zone
+schema:
+  file: ./schema.graphql
+network:
+  chainId: injective-1
+  endpoint: "http://archival-sentry-equinix-2.injective.dev:26657"
+dataSources:
+  - kind: cosmos/Runtime
+    startBlock: 1
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - handler: handleEvent
+          kind: cosmos/EventHandler
+        - handler: handleMessage
+          kind: cosmos/MessageHandler
