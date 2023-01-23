@@ -40,7 +40,8 @@ export async function handleEvent(event: CosmosEvent) {
     });
     await eventStore.save();
 
-    if(event.event.type === 'ethereumTx') {
+    // Cronos uses snake case "ethereum_tx"
+    if(event.event.type === 'ethereumTx' || event.event.type === 'ethereum_tx') {
        await handleEvmLog(event);
     }
 }
@@ -95,13 +96,19 @@ export async function handleEvmLog(event: CosmosEvent) {
     const log = event.log;
     const blockHeight = BigInt(event.block.block.header.height);
     const evmLogs: EvmLog[] = [];
-    for(const attr of log.events.find(evt => evt.type === 'ethereumTx').attributes) {
+
+    // Cronos uses snake case `tx_log`
+    const logAttributes = log.events
+        .find(evt => evt.type === 'ethereumTx' || evt.type === 'tx_log')
+        ?.attributes
+    for(const attr of logAttributes) {
         if(attr.key !== 'txLog') {
             continue;
         }
+
         const tx = JSON.parse(attr.value);
         const evmLog = EvmLog.create({
-            id: `${event.block.block.id}-${event.tx.hash}-${event.idx}`,
+            id: `${event.block.block.id}-${event.tx.hash}-${tx.logIndex ?? event.idx}`,
             blockHeight,
             address: tx.address,
             topics0: tx.topics[0],
