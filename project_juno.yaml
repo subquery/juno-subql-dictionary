@@ -27,6 +27,14 @@ network:
       file: "./proto/cosmos/gov/v1beta1/gov.proto"
       messages:
         - "WeightedVoteOption"
+    cosmos.base.v1beta1: # needed by MsgInstantiateContract2
+      file: "./proto/cosmos/cosmos.base.v1beta1.coin.proto"
+      messages:
+        - "Coin"
+    cosmwasm.wasm.v1:
+      file: "./proto/cosmwasm/wasm/v1/tx.proto"
+      messages:
+        - "MsgInstantiateContract2"
 
 dataSources:
   - kind: cosmos/Runtime
