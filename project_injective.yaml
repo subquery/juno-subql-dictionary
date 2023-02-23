@@ -13,7 +13,7 @@ schema:
   file: ./schema.graphql
 network:
   chainId: injective-1
-  endpoint: "http://archival-sentry-equinix-2.injective.dev:26657"
+  endpoint: "https://archival.tm.injective.network"
 dataSources:
   - kind: cosmos/Runtime
     startBlock: 1
