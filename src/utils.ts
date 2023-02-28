@@ -20,6 +20,7 @@ export function isSuccess(rawLog: string, index: number): boolean {
 }
 
 export function stripObjectUnicode(t: object): object {
+    if (!t) return t;
     // Warning negative lookbehind `(?<!\\)` in regex might not work in all JS versions
     return JSON.parse(
         JSON.stringify(t)

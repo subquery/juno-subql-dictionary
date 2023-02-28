@@ -107,14 +107,15 @@ export async function handleEvmLog(event: CosmosEvent) {
         }
 
         const tx = JSON.parse(attr.value);
+
         const evmLog = EvmLog.create({
             id: `${event.block.block.id}-${event.tx.hash}-${tx.logIndex ?? event.idx}`,
             blockHeight,
             address: tx.address,
-            topics0: tx.topics[0],
-            topics1: tx.topics[1],
-            topics2: tx.topics[2],
-            topics3: tx.topics[3],
+            topics0: tx.topics?.[0] ?? '',
+            topics1: tx.topics?.[1],
+            topics2: tx.topics?.[2],
+            topics3: tx.topics?.[3],
         })
         evmLogs.push(evmLog);
 
