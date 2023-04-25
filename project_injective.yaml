@@ -14,6 +14,11 @@ schema:
 network:
   chainId: injective-1
   endpoint: "https://archival.tm.injective.network"
+  chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
+    injective.peggy.v1:
+      file: "./proto/injective/peggy/v1/msgs.proto"
+      messages:
+        - "MsgSetOrchestratorAddresses"
 dataSources:
   - kind: cosmos/Runtime
     startBlock: 1

@@ -4,7 +4,8 @@ type ChainAliases @entity {
 }
 
 # Equivalent to typescript any type
-type AnyJSON @jsonField {
+# Index is disabled for Cockroach DB performance
+type AnyJSON @jsonField(indexed: false) {
   # Need to have one value in this field
   _: String
 }

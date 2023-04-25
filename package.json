@@ -34,6 +34,7 @@
     "tslib": "^2.3.1"
   },
   "resolutions": {
-    "ipfs-unixfs": "6.0.6"
+    "ipfs-unixfs": "6.0.6",
+    "@subql/utils": "^1.5.0"
   }
 }
