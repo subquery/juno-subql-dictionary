@@ -19,6 +19,10 @@ network:
       file: "./proto/cosmos/slashing/v1beta1/tx.proto"
       messages:
         - "MsgUnjail"
+    cosmos.bank.v1beta1:
+      file: "./proto/cosmos/bank/v1beta1/bank.proto"
+      messages:
+        - Metadata
     cosmos.gov.v1beta1:
       file: "./proto/cosmos/gov/v1beta1/tx.proto"
       messages:
@@ -54,7 +58,8 @@ network:
 
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 4136532
+    # startBlock: 4136532
+    startBlock: 7408909
     mapping:
       file: ./dist/index.js
       handlers:
