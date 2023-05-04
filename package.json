@@ -1,7 +1,7 @@
 {
-  "name": "terra-dictionary",
+  "name": "cosmos-dictionaries",
   "version": "1.0.0",
-  "description": "A SubQuery project provide dictionary data & service for the Terra network",
+  "description": "A SubQuery project provide dictionary data & service for the Cosmos networks",
   "main": "dist/index.js",
   "scripts": {
     "build": "subql build",
@@ -11,8 +11,8 @@
     "prepack": "rm -rf dist && npm run build",
     "test": "jest"
   },
-  "homepage": "https://github.com/subquery/terra-dictionary",
-  "repository": "github:subquery/terra-dictionary",
+  "homepage": "https://github.com/subquery/cosmos-subql-dictionaries",
+  "repository": "github:subquery/cosmos-subql-dictionaries",
   "files": [
     "dist",
     "schema.graphql",
@@ -34,7 +34,6 @@
     "tslib": "^2.3.1"
   },
   "resolutions": {
-    "ipfs-unixfs": "6.0.6",
-    "@subql/utils": "^1.5.0"
+    "ipfs-unixfs": "6.0.6"
   }
 }
