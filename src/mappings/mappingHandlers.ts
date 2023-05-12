@@ -30,9 +30,8 @@ async function setAliases() {
 
 export async function handleEvent(event: CosmosEvent) {
     const blockHeight = BigInt(event.block.block.header.height);
-    const id = `${event.block.block.id}-${event.tx ? event.tx.hash : 'start_end'}-${event.idx}`
     const eventStore = Event.create({
-        id: id,
+        id: `${event.block.block.id}-${event.idx}`,
         blockHeight,
         txHash: event.tx?.hash,
         type: event.event.type,
