@@ -31,12 +31,12 @@ async function setAliases() {
 export async function handleEvent(event: CosmosEvent) {
     const blockHeight = BigInt(event.block.block.header.height);
     const eventStore = Event.create({
-        id: `${event.block.block.id}-${event.tx.hash}-${event.idx}`,
+        id: `${event.block.block.id}-${event.idx}`,
         blockHeight,
-        txHash: event.tx.hash,
+        txHash: event.tx?.hash,
         type: event.event.type,
-        msgType: event.msg.msg.typeUrl,
-        data: stripObjectUnicode(event.msg.msg.decodedMsg),
+        msgType: event.msg?.msg.typeUrl,
+        data: stripObjectUnicode(event.msg?.msg.decodedMsg),
     });
     await eventStore.save();
 
