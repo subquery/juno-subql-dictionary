@@ -1,32 +1,6 @@
 import { CosmosEvent, CosmosMessage } from "@subql/types-cosmos";
-import { Event, EvmLog, EvmTransaction, Message, ChainAliases } from "../types";
+import { Event, EvmLog, EvmTransaction, Message } from "../types";
 import { inputToFunctionSighash, isSuccess, isZero, stripObjectUnicode } from "../utils";
-
-const evmChainId: Record<string, string> = {
-    'cronosmainnet_25-1': '25',
-    'cronostestnet_338-1':'338'
-}
-
-let checkedAliases = false;
-
-async function setAliases() {
-    if (checkedAliases) return;
-
-    const cosmosChainId = await (global as any).api.getChainId();
-    if(!evmChainId[cosmosChainId]) {
-        checkedAliases = true;
-        return;
-    }
-
-    const chianAliases = ChainAliases.create({
-        id: 'evmChainId',
-        value: evmChainId[cosmosChainId]
-    })
-
-    await chianAliases.save();
-
-    checkedAliases = true;
-}
 
 export async function handleEvent(event: CosmosEvent) {
     const blockHeight = BigInt(event.block.block.header.height);
@@ -47,8 +21,6 @@ export async function handleEvent(event: CosmosEvent) {
 }
 
 export async function handleMessage(message: CosmosMessage) {
-    await setAliases();
-
     const blockHeight = BigInt(message.block.block.header.height);
 
     // Strip escaped unicode characters
@@ -78,14 +50,14 @@ export async function handleEvmTransaction(message: CosmosMessage) {
     const tx = message.msg.decodedMsg as any;
     const decodedTx = registry.decode(tx.data);
 
-    const func = isZero(decodedTx.data) ? undefined : inputToFunctionSighash(decodedTx.data);
+    const func = isZero(decodedTx.data) ? undefined : inputToFunctionSighash(decodedTx.data).toLowerCase();
 
     const txStore = EvmTransaction.create({
         id: `${message.block.block.id}-${message.tx.hash}-${message.idx}`,
         txHash: tx.hash,
         blockHeight,
-        from: tx.from,
-        to: decodedTx.to,
+        from: tx.from.toLowerCase(),
+        to: decodedTx.to.toLowerCase(),
         func: func,
         success: isSuccess(message.tx.tx.log, message.idx),
     });
@@ -112,10 +84,10 @@ export async function handleEvmLog(event: CosmosEvent) {
             id: `${event.block.block.id}-${event.tx.hash}-${tx.logIndex ?? event.idx}`,
             blockHeight,
             address: tx.address,
-            topics0: tx.topics?.[0] ?? '',
-            topics1: tx.topics?.[1],
-            topics2: tx.topics?.[2],
-            topics3: tx.topics?.[3],
+            topics0: tx.topics?.[0].toLowerCase() ?? '',
+            topics1: tx.topics?.[1].toLowerCase(),
+            topics2: tx.topics?.[2].toLowerCase(),
+            topics3: tx.topics?.[3].toLowerCase(),
         })
         evmLogs.push(evmLog);
 
