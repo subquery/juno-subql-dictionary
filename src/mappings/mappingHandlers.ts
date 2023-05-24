@@ -72,7 +72,7 @@ export async function handleEvmLog(event: CosmosEvent) {
     // Cronos uses snake case `tx_log`
     const logAttributes = log.events
         .find(evt => evt.type === 'ethereumTx' || evt.type === 'tx_log')
-        ?.attributes
+        ?.attributes ?? [];
     for(const attr of logAttributes) {
         if(attr.key !== 'txLog') {
             continue;
