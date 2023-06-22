@@ -1,0 +1,31 @@
+specVersion: 1.0.0
+name: sei-dictionary
+version: 1.0.0
+runner:
+  node:
+    name: "@subql/node-cosmos"
+    version: "*"
+  query:
+    name: "@subql/query"
+    version: "*"
+description: A SubQuery project provide dictionary data & service for the Cosmos - Sei zone
+schema:
+  file: ./schema.graphql
+network:
+  chainId: atlantic-2
+  endpoint:
+    [
+      "https://sei.kingnodes.com/",
+      "https://rpc.atlantic-2.seinetwork.io/",
+      "https://sei-testnet-2-rpc.brocha.in/",
+    ]
+dataSources:
+  - kind: cosmos/Runtime
+    startBlock: 4280000
+    mapping:
+      file: ./dist/index.js
+      handlers:
+        - handler: handleEvent
+          kind: cosmos/EventHandler
+        - handler: handleMessage
+          kind: cosmos/MessageHandler
