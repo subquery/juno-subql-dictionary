@@ -8,7 +8,7 @@ export function inputToFunctionSighash(input: string): string {
 export function isZero(input: string): boolean {
     return stripZeros(input).length === 0;
 }
-export function isSuccess(rawLog: string, index: number): boolean {
+export function isSuccess(rawLog: string | undefined, index: number): boolean {
     try {
       const log = parseRawLog(rawLog).find((l) => l.msg_index === index);
       const txLog = log?.events.find((evt) => evt.type === 'ethereumTx');

@@ -4,6 +4,8 @@ import { inputToFunctionSighash, isSuccess, isZero, stripObjectUnicode } from ".
 
 export async function handleEvent(event: CosmosEvent) {
     const blockHeight = BigInt(event.block.block.header.height);
+
+
     const eventStore = Event.create({
         id: `${event.block.block.id}-${event.idx}`,
         blockHeight,
@@ -12,6 +14,7 @@ export async function handleEvent(event: CosmosEvent) {
         msgType: event.msg?.msg.typeUrl,
         data: stripObjectUnicode(event.msg?.msg.decodedMsg),
     });
+
     await eventStore.save();
 
     // Cronos uses snake case "ethereum_tx"
@@ -57,10 +60,11 @@ export async function handleEvmTransaction(message: CosmosMessage) {
         txHash: tx.hash,
         blockHeight,
         from: tx.from.toLowerCase(),
-        to: decodedTx.to.toLowerCase(),
+        to: decodedTx.to === '' ? undefined : decodedTx.to?.toLowerCase(),
         func: func,
         success: isSuccess(message.tx.tx.log, message.idx),
     });
+
     await txStore.save();
 }
 
@@ -72,7 +76,7 @@ export async function handleEvmLog(event: CosmosEvent) {
     // Cronos uses snake case `tx_log`
     const logAttributes = log.events
         .find(evt => evt.type === 'ethereumTx' || evt.type === 'tx_log')
-        ?.attributes
+        ?.attributes ?? [];
     for(const attr of logAttributes) {
         if(attr.key !== 'txLog') {
             continue;
@@ -84,13 +88,13 @@ export async function handleEvmLog(event: CosmosEvent) {
             id: `${event.block.block.id}-${event.tx.hash}-${tx.logIndex ?? event.idx}`,
             blockHeight,
             address: tx.address,
-            topics0: tx.topics?.[0].toLowerCase() ?? '',
-            topics1: tx.topics?.[1].toLowerCase(),
-            topics2: tx.topics?.[2].toLowerCase(),
-            topics3: tx.topics?.[3].toLowerCase(),
-        })
-        evmLogs.push(evmLog);
+            topics0: tx.topics?.[0]?.toLowerCase() ?? '',
+            topics1: tx.topics?.[1]?.toLowerCase(),
+            topics2: tx.topics?.[2]?.toLowerCase(),
+            topics3: tx.topics?.[3]?.toLowerCase(),
+        });
 
+        evmLogs.push(evmLog);
     }
 
     await store.bulkCreate('EvmLog', evmLogs);
