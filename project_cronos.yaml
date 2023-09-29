@@ -34,6 +34,14 @@ network:
       file: "./proto/cosmos/cosmos.base.v1beta1.coin.proto"
       messages:
         - "Coin"
+    cosmos.gov.v1gov: # Needed for VoteOption
+      file: "./proto/cosmos/gov/v1/gov.proto"
+      messages:
+        - WeightedVoteOption
+    cosmos.gov.v1:
+      file: "./proto/cosmos/gov/v1/tx.proto"
+      messages:
+        - MsgVote
     cosmos.slashing.v1beta1:
       file: "./proto/cosmos/slashing/v1beta1/tx.proto"
       messages:
