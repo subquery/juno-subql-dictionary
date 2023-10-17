@@ -12,16 +12,15 @@ description: A SubQuery project provide dictionary data & service for the Cosmos
 schema:
   file: ./schema.graphql
 network:
-  chainId: atlantic-2
+  chainId: pacific-1
   endpoint:
     [
-      "https://sei.kingnodes.com/",
-      "https://rpc.atlantic-2.seinetwork.io/",
-      "https://sei-testnet-2-rpc.brocha.in/",
+      "https://rpc.ankr.com/sei",
+      # "https://sei.kingnodes.com/",
     ]
 dataSources:
   - kind: cosmos/Runtime
-    startBlock: 4280000
+    startBlock: 0
     mapping:
       file: ./dist/index.js
       handlers:
