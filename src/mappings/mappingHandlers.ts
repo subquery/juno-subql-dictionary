@@ -97,5 +97,7 @@ export async function handleEvmLog(event: CosmosEvent) {
         evmLogs.push(evmLog);
     }
 
-    await store.bulkCreate('EvmLog', evmLogs);
+    for (const evmLog of evmLogs) {
+        await evmLog.save()
+    }
 }

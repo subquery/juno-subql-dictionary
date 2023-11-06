@@ -5,6 +5,9 @@ runner:
   node:
     name: '@subql/node-cosmos'
     version: ">=0.1.0"
+    options:
+      unfinalizedBlocks: false
+      historical: false
   query:
     name: '@subql/query'
     version: "*"
