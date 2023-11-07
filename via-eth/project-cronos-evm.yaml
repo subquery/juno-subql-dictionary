@@ -1,0 +1,30 @@
+specVersion: 1.0.0
+version: 0.0.1
+name: cronos-evm-dictionary
+description: >-
+  This project can be use as a starting point for developing your Cosmos
+  (Cronos) based SubQuery project via the Etheruem API
+runner:
+  node:
+    name: '@subql/node-ethereum'
+    version: '>=3.0.0'
+    options:
+      unfinalizedBlocks: false
+      historical: false
+  query:
+    name: '@subql/query'
+    version: '*'
+schema:
+  file: ./schema.graphql
+network:
+  chainId: '25'
+  endpoint:
+    - https://evm.cronos.org
+dataSources:
+  - kind: ethereum/Runtime
+    startBlock: 1
+    mapping:
+      file: "./dist/index.js"
+      handlers:
+        - handler: handleBlock
+          kind: ethereum/BlockHandler
