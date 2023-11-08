@@ -20,7 +20,7 @@ network:
   # This is a public node that is rate limited, which will affect indexing speed.
   # When developing your project we strongly suggest getting a private API key.
   endpoint: "https://osmosis-testnet-archive.allthatnode.com:26657"
-  chainTypes:
+  chaintypes:
     cosmos.slashing.v1beta1:
       file: ./proto/cosmos/slashing/v1beta1/tx.proto
       messages:
