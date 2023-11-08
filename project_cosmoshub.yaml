@@ -17,7 +17,7 @@ schema:
 network:
   chainId: cosmoshub-4
   endpoint: https://rpc.cosmos.network
-  chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
+  chaintypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
     cosmos.base.v1beta1: # needed by MsgCreatePool
       file: "./proto/cosmos/cosmos.base.v1beta1.coin.proto"
       messages:

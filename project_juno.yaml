@@ -16,8 +16,8 @@ schema:
   file: ./schema.graphql
 network:
   chainId: juno-1
-  endpoint: https://rpc-juno.whispernode.com:443
-  chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
+  endpoint: 'https://rpc-archive.junonetwork.io'
+  chaintypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
     cosmos.slashing.v1beta1:
       file: "./proto/cosmos/slashing/v1beta1/tx.proto"
       messages:

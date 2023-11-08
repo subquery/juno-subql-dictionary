@@ -17,7 +17,7 @@ schema:
 network:
   chainId: cronosmainnet_25-1
   endpoint: "https://rpc.cronos.org/"
-  chainTypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
+  chaintypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
     ethermint.evm.v1:
       file: "./proto/ethermint/evm/v1/tx.proto"
       messages:
