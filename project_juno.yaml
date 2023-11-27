@@ -14,6 +14,11 @@ runner:
 description: A SubQuery project provide dictionary data & service for the Terra network
 schema:
   file: ./schema.graphql
+
+parent:
+  reference: QmPPGj2BkknPmFXmsH7j2dVmruNpFXui28XLDWVm1PSc2J
+  block: 7880532
+
 network:
   chainId: juno-1
   endpoint: 'https://rpc-archive.junonetwork.io'
@@ -58,10 +63,16 @@ network:
         - MsgSetDenomMetadata
         - MsgSetBeforeSendHook
         - MsgForceTransfer
+    ibc.applications.fee.v1:
+      file: "./proto/ibc/applications/fee/v1/tx.proto"
+      messages:
+        - MsgRegisterPayee
+        - MsgRegisterCounterpartyPayee
+        - MsgPayPacketFee
+        - MsgPayPacketFeeAsync
 
 dataSources:
   - kind: cosmos/Runtime
-    # startBlock: 4136532
     startBlock: 7408909
     mapping:
       file: ./dist/index.js
