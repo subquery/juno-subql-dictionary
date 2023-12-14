@@ -15,9 +15,18 @@ description: A SubQuery project provide dictionary data & service for the Terra 
 schema:
   file: ./schema.graphql
 
+parent:
+  reference: QmdMLdD6UwcCi69iCt1JRvA75ES7LGAsjrKXVYJ7YgvXxf
+  block: 8338891
+
 network:
   chainId: juno-1
-  chaintypes:
+  endpoint: 'https://rpc-archive.junonetwork.io'
+  chaintypes: # This is a beta feature that allows support for any Cosmos chain by importing the correct protobuf messages
+    cosmos.slashing.v1beta1:
+      file: "./proto/cosmos/slashing/v1beta1/tx.proto"
+      messages:
+        - "MsgUnjail"
     cosmos.bank.v1beta1:
       file: "./proto/cosmos/bank/v1beta1/bank.proto"
       messages:
@@ -54,6 +63,23 @@ network:
         - MsgSetDenomMetadata
         - MsgSetBeforeSendHook
         - MsgForceTransfer
+    ibc.applications.fee.v1:
+      file: "./proto/ibc/applications/fee/v1/tx.proto"
+      messages:
+        - MsgRegisterPayee
+        - MsgRegisterCounterpartyPayee
+        - MsgPayPacketFee
+        - MsgPayPacketFeeAsync
+    ibc.applications.fee.v1.fee:
+      file: "./proto/ibc/applications/fee/v1/fee.proto"
+      messages:
+        - PacketFee
+    ibc.core.channel.v1:
+      file: "./proto/ibc/core/channel/v1/channel.proto"
+      messages:
+        - Packet
+        - PacketId
+        - PacketState
 
 dataSources:
   - kind: cosmos/Runtime
