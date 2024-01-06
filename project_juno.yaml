@@ -80,6 +80,10 @@ network:
         - Packet
         - PacketId
         - PacketState
+    pob.builder.v1:
+      file: "./proto/pob/builder/v1/tx.proto"
+      messages:
+        - MsgAuctionBid
 
 dataSources:
   - kind: cosmos/Runtime
