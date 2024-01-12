@@ -17,7 +17,7 @@ schema:
 
 parent:
   reference: QmT9M7AZSWgh8KrHUS2Q5kGPSy2FTankgnoPd8KKA9J7nT
-  block: 9481749
+  block: 9481750
 
 network:
   chainId: juno-1
