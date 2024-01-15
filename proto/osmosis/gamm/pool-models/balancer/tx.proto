@@ -2,7 +2,7 @@ syntax = "proto3";
 package osmosis.gamm.poolmodels.balancer.v1beta1;
 
 import "gogoproto/gogo.proto";
-import "osmosis/gamm/pool-models/balancer/balancerPool.proto";
+import "osmosis/gamm/v1beta1/balancerPool.proto";
 
 option go_package = "github.com/osmosis-labs/osmosis/v10/x/gamm/pool-models/balancer";
 
