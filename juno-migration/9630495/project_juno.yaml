@@ -16,7 +16,7 @@ schema:
   file: ./schema.graphql
 
 parent:
-  reference: _1
+  reference: QmQzYXv3tiXH5ah5MEqX55CDp2JzfaKtpQevBGzU5SrZ8P
   block: 9630495
 
 network:
