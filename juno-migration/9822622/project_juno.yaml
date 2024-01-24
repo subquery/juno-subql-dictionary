@@ -16,8 +16,8 @@ schema:
   file: ./schema.graphql
 
 parent:
-  reference: QmdMLdD6UwcCi69iCt1JRvA75ES7LGAsjrKXVYJ7YgvXxf
-  block: 8338891
+  reference: QmPjq55mgUt9S8S491Q3wEbb87fXyEkdxymT6Gwe2xe1Z1
+  block: 9822622
 
 network:
   chainId: juno-1
