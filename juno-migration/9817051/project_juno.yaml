@@ -16,7 +16,7 @@ schema:
   file: ./schema.graphql
 
 parent:
-  reference: QmSNksgvSNHc5YCrfu63pmzoxpdzVciUFwgvRdk118dejs
+  reference: QmPjq55mgUt9S8S491Q3wEbb87fXyEkdxymT6Gwe2xe1Z1
   block: 9817051
 
 network:
@@ -56,6 +56,7 @@ network:
       messages:
         - "MsgVote"
         - "MsgSubmitProposal"
+        - "MsgDeposit"
     juno.feeshare.v1:
       file: "./proto/juno/feeshare/v1/tx.proto"
       messages:
