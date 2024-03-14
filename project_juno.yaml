@@ -88,6 +88,7 @@ network:
       file: "./proto/ibc/applications/interchain_accounts/controller/v1/tx.proto"
       messages:
         - MsgRegisterInterchainAccount
+        - MsgSendTx
     ibc.core.channel.v1:
       file: "./proto/ibc/core/channel/v1/channel.proto"
       messages:
