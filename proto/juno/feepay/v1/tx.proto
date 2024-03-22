@@ -124,6 +124,15 @@ message MsgUpdateParams {
   Params params = 2 [(gogoproto.nullable) = false];
 }
 
+message FeePayContract {
+  // The address of the contract.
+  string contract_address = 1;
+  // The ledger balance of the contract.
+  uint64 balance = 2;
+  // The number of times a wallet may interact with the contract.
+  uint64 wallet_limit = 3;
+}
+
 // MsgUpdateParamsResponse defines the response structure for executing a
 // MsgUpdateParams message.
 //
