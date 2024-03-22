@@ -103,6 +103,7 @@ network:
       file: "./proto/juno/feepay/v1/tx.proto"
       messages:
         - MsgRegisterFeePayContract
+        - MsgFundFeePayContract
 
 dataSources:
   - kind: cosmos/Runtime
