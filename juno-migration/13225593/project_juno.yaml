@@ -99,6 +99,10 @@ network:
       file: "./proto/pob/builder/v1/tx.proto"
       messages:
         - MsgAuctionBid
+    juno.feepay.v1:
+      file: "./proto/juno/feepay/v1/tx.proto"
+      messages:
+        - MsgRegisterFeePayContract
 
 dataSources:
   - kind: cosmos/Runtime
