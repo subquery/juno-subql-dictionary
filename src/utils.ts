@@ -1,5 +1,6 @@
 import { parseRawLog } from "@cosmjs/stargate/build/logs";
 import { hexDataSlice, stripZeros } from "@ethersproject/bytes";
+import jsonb from "json-bigint";
 
 export function inputToFunctionSighash(input: string): string {
     return hexDataSlice(input, 0, 4);
@@ -22,8 +23,8 @@ export function isSuccess(rawLog: string | undefined, index: number): boolean {
 export function stripObjectUnicode(t: object): object {
     if (!t) return t;
     // Warning negative lookbehind `(?<!\\)` in regex might not work in all JS versions
-    return JSON.parse(
-        JSON.stringify(t)
+    return jsonb.parse(
+        jsonb.stringify(t)
             .replace(/(?<!\\)\\u[0-9A-Fa-f]{4}/g, '')
     );
 }
