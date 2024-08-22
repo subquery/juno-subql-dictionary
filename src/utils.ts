@@ -3,7 +3,7 @@ import { hexDataSlice, stripZeros } from "@ethersproject/bytes";
 
 // Make BigInt json serializable, note this doesn't go from string -> BigInt when parsing
 (BigInt.prototype as any).toJSON = function () {
-    return `${this.toString()}n`;
+    return this.toString();
 };
 
 
