@@ -1,6 +1,12 @@
 import { parseRawLog } from "@cosmjs/stargate/build/logs";
 import { hexDataSlice, stripZeros } from "@ethersproject/bytes";
 
+// Make BigInt json serializable, note this doesn't go from string -> BigInt when parsing
+(BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+};
+
+
 export function inputToFunctionSighash(input: string): string {
     return hexDataSlice(input, 0, 4);
 }
